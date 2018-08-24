@@ -13,7 +13,7 @@ The ACM is an umbrella organization for academic and scholarly interests in comp
 
 ## Technologies
 * Python 3
-* C++ (for performance optimize)
+* C++ (for performance optimalization)
 * Markdown
 * Vim
 * Git
