@@ -33,12 +33,12 @@ class NumberSteps:
 
 
 
-## Main section
-numberSteps = NumberSteps();
-countRepeats = int(input());
-repeat = 0;
-while repeat < countRepeats:
-    rawString = input();
-    point = Point.make_instance_from_raw_string(rawString);
-    print(numberSteps.get_number_on(point));
-    repeat+=1;
+if __name__ == '__main__':
+    numberSteps = NumberSteps();
+    countRepeats = int(input());
+    repeat = 0;
+    while repeat < countRepeats:
+        rawString = input();
+        point = Point.make_instance_from_raw_string(rawString);
+        print(numberSteps.get_number_on(point));
+        repeat+=1;
