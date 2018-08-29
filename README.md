@@ -5,12 +5,14 @@ The ACM is an umbrella organization for academic and scholarly interests in comp
 ## Status
 ### Backlog puzzles
 * 2061
-* 2044
+
 
 ### Progress puzzles
-* 2052 - Number steps
+* 2044 - Courses
+
 
 ### Solved puzzles
+* 2052 - Number steps
 
 ## Technologies
 * Python 3
