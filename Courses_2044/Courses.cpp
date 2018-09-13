@@ -1,9 +1,11 @@
 #include<iostream>
+#include<vector>
+#include<map>
 using namespace std;
 
 
 
-void printInputs(int countCourses, int countStudents, bool assignStudents[], int* courseToStudentsMap[])
+void printInputs(int countCourses, int countStudents, bool assignStudents[], map<int,vector<int>*> courseToStudentsMap)
 {
 	cout << "Count courses: " << countCourses << "\n";
 	cout << "Count students: " << countStudents << "\n";
@@ -15,15 +17,17 @@ void printInputs(int countCourses, int countStudents, bool assignStudents[], int
 		cout << "Student id: " << i << " is assigned to any course: " << (assignStudents[i]==1?"True":"False") << "\n";
 	}
 	
+	
 	cout << "\nCourses:\n";
-	for (int courseId=0; courseId<countCourses;courseId++){
-		int* students= courseToStudentsMap[courseId];
-		int sizeOfStudents = students[0];
-		cout << "CourseId: " << courseId << "\n";
-		cout << "*************************\n";
-		for(int j=1;j<=sizeOfStudents;j++)
+	for(map<int,vector<int>*>::iterator it=courseToStudentsMap.begin(); it != courseToStudentsMap.end(); it++)
+	{
+		cout << "CourseId: " << it->first << "\n";
+		cout << "*************************************\n";
+
+		vector<int>* students = it->second;
+		for(vector<int>::iterator studentIt=students->begin(); studentIt != students->end(); studentIt++)
 		{
-			cout << "studentId:" << students[j] << "\n";
+			cout << "StudentId: " << *studentIt << "\n";
 		}
 		cout << "\n";
 	}
@@ -43,7 +47,7 @@ int computeCountAssignStudents(bool *assignStudents, int countStudents)
 	return count;
 }
 
-bool existCombinationOfStudentsForBuildCommittee(int countCourses, int countStudents, bool *assignStudents, int **courseToStudentsMap)
+bool existCombinationOfStudentsForBuildCommittee(int countCourses, int countStudents, bool *assignStudents, map<int,vector<int>*> courseToStudentsMap)
 {
 	if (countStudents < countCourses)
 	{
@@ -75,8 +79,9 @@ int main()
 		cin >> countStudents;
 		cin >> countCourses;
 		
-		int **courseToStudentsMap = new int*[countCourses];
-		bool *assignStudents = new bool[countStudents+1];
+		map<int,vector<int>*> courseToStudentsMap;
+		bool *assignStudents = new bool[countStudents];
+		
 		for (int i=0;i<=countStudents;i++)
 		{
 			assignStudents[i] = false;
@@ -86,18 +91,20 @@ int main()
 		{
 			int countStudentsInCourse = 0;
 			cin >> countStudentsInCourse;
-			int* students = new int[countStudentsInCourse+1];
-			students[0]=countStudentsInCourse;
-			for(int i=1;i<=countStudentsInCourse;i++){
+			vector<int> *students = new vector<int>(countStudentsInCourse);
+			for(int i=0;i<countStudentsInCourse;i++){
 				int studentId = 0;
 				cin >> studentId;
-				students[i] = studentId;
+				studentId--; //increment id, because array start from position zero
+				students->at(i)  = studentId;
 				assignStudents[studentId] = true;
 			}
 			
 			courseToStudentsMap[courseId]=&students[0];
 		}
 		
+		//printInputs(countCourses,countStudents,assignStudents,courseToStudentsMap);
+			
 		// Compute if exist committee
 		if(existCombinationOfStudentsForBuildCommittee(countStudents,countCourses,assignStudents,courseToStudentsMap))
 		{
