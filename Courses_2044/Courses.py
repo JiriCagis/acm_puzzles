@@ -33,15 +33,14 @@ class Courses:
                 
 
         def exist_combination_of_students_for_build_committee(self):
-                #if self.count_students < self.count_courses \
-                #   or not self.__are_open_all_courses() \
-                #   or not self.__is_assigned_more_or_equal_studens_as_courses():
-                #        return "NO";                
+                if self.count_students < self.count_courses \
+                   or not self.__are_open_all_courses() \
+                   or not self.__is_assigned_more_or_equal_studens_as_courses():
+                        return "NO";                
 
-                #return "YES"
-                #self.fixed_committee = self.__compute_fixed_committee_of_courses_with_one_member();
-                #if self.__count_students_in_pernament_committee() == self.count_courses:
-                #        return "YES"
+                self.fixed_committee = self.__compute_fixed_committee_of_courses_with_one_member();
+                if self.__count_students_in_pernament_committee() == self.count_courses:
+                        return "YES"
 
                 # init blank committee before recursion decision
                 committee = [];
