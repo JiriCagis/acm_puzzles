@@ -4,7 +4,11 @@
 #include<algorithm>
 using namespace std;
 
-map<int,vector<int>> courseToStudetsMap; 
+// Global variables
+map<int,vector<int>> courseToStudentsMap; 
+
+
+
 
 void printInputs(int countCourses, int countStudents, bool assignStudents[], map<int,vector<int>> courseToStudentsMap)
 {
@@ -162,7 +166,6 @@ int main()
 			for(int i=0;i<countStudentsInCourse;i++){
 				int studentId = 0;
 				cin >> studentId;
-				//studentId--; //increment id, because array start from position zero
 				students[i]  = studentId;
 				assignStudents[studentId] = true;
 			}
