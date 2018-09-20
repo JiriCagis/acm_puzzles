@@ -5,12 +5,12 @@
 using namespace std;
 
 // Global variables
-map<int,vector<int>> courseToStudentsMap; 
+map<int,vector<int> > courseToStudentsMap; 
 
 
 
 
-void printInputs(int countCourses, int countStudents, bool assignStudents[], map<int,vector<int>> courseToStudentsMap)
+void printInputs(int countCourses, int countStudents, bool assignStudents[], map<int,vector<int> > courseToStudentsMap)
 {
 	cout << "Count courses: " << countCourses << "\n";
 	cout << "Count students: " << countStudents << "\n";
@@ -24,7 +24,7 @@ void printInputs(int countCourses, int countStudents, bool assignStudents[], map
 	
 	
 	cout << "\nCourses:\n";
-	for(map<int,vector<int>>::iterator it=courseToStudentsMap.begin(); it != courseToStudentsMap.end(); it++)
+	for(map<int,vector<int> >::iterator it=courseToStudentsMap.begin(); it != courseToStudentsMap.end(); it++)
 	{
 		cout << "CourseId: " << it->first << "\n";
 		cout << "*************************************\n";
@@ -36,20 +36,6 @@ void printInputs(int countCourses, int countStudents, bool assignStudents[], map
 		}
 		cout << "\n";
 	}
-}
-
-int computeCountAssignStudents(bool *assignStudents, int countStudents)
-{
-	int count = 0;
-	
-	for (int i=0; i<=countStudents; i++)
-	{
-		if (assignStudents[i] == 1)
-		{
-			count++;
-		}
-	}	
-	return count;
 }
 
 bool decideExistCommitteeByRecursion(vector<int> committee, int courseId)
@@ -116,22 +102,21 @@ bool decideExistCommitteeByRecursion(vector<int> committee, int courseId)
 	return false;
 }
 
-bool existCombinationOfStudentsForBuildCommittee(int countCourses, int countStudents, bool *assignStudents, map<int,vector<int>> courseToStudentsMap)
+bool existCombinationOfStudentsForBuildCommittee(int countCourses, int countStudents, vector<bool> assignStudents, map<int,vector<int> > courseToStudentsMap)
 {
-	
 	if (countStudents < countCourses)
 	{
 		return false;
 	}
 		
-	if(countCourses > computeCountAssignStudents(assignStudents,countStudents))
+	int countAssignStudents = count(assignStudents.begin(),assignStudents.end(),true);
+	if(countAssignStudents < countCourses)
 	{	
 		return false;
 	}
 
-	vector<int> committee(countCourses);
-	bool result = decideExistCommitteeByRecursion(committee,0);
-	return result;
+	vector<int> committee(countCourses,0);
+	return decideExistCommitteeByRecursion(committee,0);
 }
 
 
@@ -151,12 +136,7 @@ int main()
 		cin >> countCourses;
 		cin >> countStudents;
 		
-		bool assignStudents[countStudents];
-		
-		for (int i=0;i<=countStudents;i++)
-		{
-			assignStudents[i] = false;
-		}
+		vector<bool> assignStudents(countStudents,false);
 		
 		for(int courseId =0;courseId < countCourses;courseId++)
 		{
@@ -167,7 +147,7 @@ int main()
 				int studentId = 0;
 				cin >> studentId;
 				students[i]  = studentId;
-				assignStudents[studentId] = true;
+				assignStudents[studentId-1] = true;
 			}
 			
 			courseToStudentsMap[courseId]=students;
@@ -183,9 +163,9 @@ int main()
 			cout << "NO" << "\n";
 		}
 		//Clear data
-		courseToStudentsMap.clear();	
+		courseToStudentsMap.clear();
+		assignStudents.clear();	
 	}
 	
-	return(0);
+	return 0;
 }
-
