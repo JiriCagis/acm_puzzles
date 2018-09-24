@@ -37,21 +37,20 @@ public class Courses {
 	}
 
 	public static boolean decideExistCommitteeByRecursion(int[] committee,int courseId){
-		System.out.println(courseId);
-		System.out.println(Arrays.toString(committee));
 		if (courseId == committee.length){
 			//System.out.println(Arrays.toString(committee));
 			return true;
 		}
 		Set<Integer> students = courseToStudentsMap.get(courseId);
 		Set<Integer> possibleStudents = new HashSet<>(students);
-		possibleStudents.removeAll(Arrays.asList(committee));
-		System.out.println("PossibleStudents:" + possibleStudents);
+		for(int studentId:committee){
+			possibleStudents.remove(studentId);
+		}
 		if (possibleStudents.size() == 0){
 			return false;
 		}
 
-		for(Integer studentId:students){
+		for(Integer studentId:possibleStudents){
 			committee[courseId] = studentId;
 			boolean partialResult = decideExistCommitteeByRecursion(committee,courseId+1);
 			if(partialResult == true){
