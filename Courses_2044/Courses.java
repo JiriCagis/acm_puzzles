@@ -17,7 +17,6 @@ public class Courses {
 																	  	int countStudents, 
 																		boolean[] assignStudents, 
 																		Map<Integer,Set<Integer>> courseToStudentsMap){
-		/*
 		if (countStudents < countCourses){
 			return false;
 		}
@@ -30,7 +29,7 @@ public class Courses {
 		}
 		if (countAssignStudents < countCourses){
 			return false;
-		}*/
+		}
 
 		int[] committee = new int[countCourses];
 		return decideExistCommitteeByRecursion(committee,0);
