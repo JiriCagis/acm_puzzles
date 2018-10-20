@@ -13,9 +13,9 @@ The ACM is an umbrella organization for academic and scholarly interests in comp
 
 ### Solved puzzles
 * 2052 - Number steps
-* Die CTU 2018
-* Horsemeet CTU 2018
-* Security CTU 2018
+* CTU 2018 - Die 
+* CTU 2018 - Horsemeet
+* CTU 2018 - Security
 
 
 
